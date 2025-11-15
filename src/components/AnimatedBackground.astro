@@ -1,0 +1,77 @@
+---
+---
+<div class="animated-bg-wrapper">
+  <div class="grid-background"></div>
+  <div class="particles" id="particles"></div>
+</div>
+
+<style>
+  .animated-bg-wrapper {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    overflow: hidden;
+  }
+
+  .grid-background {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgb(99 102 241 / 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(99 102 241 / 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  .particles {
+    position: absolute;
+    inset: 0;
+  }
+
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgb(99 102 241 / 0.4);
+    border-radius: 50%;
+    animation: float-particle linear infinite;
+  }
+
+  @keyframes float-particle {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(50px);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Criar partículas flutuantes
+  const particlesContainer = document.getElementById('particles');
+  if (particlesContainer) {
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      particlesContainer.appendChild(particle);
+    }
+  }
+</script>

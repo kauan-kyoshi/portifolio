@@ -1,0 +1,31 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import projects from '../data/projects.json';
+const allTags = Array.from(new Set(projects.flatMap((p) => p.tags || [])));
+---
+<section>
+  <div class="mb-6 flex flex-wrap items-center gap-2">
+    <strong class="mr-2 text-sm">Filtro:</strong>
+    <a href="?" class="rounded-full border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">Todos</a>
+    {allTags.map((t) => (
+      <a href={`?tag=${encodeURIComponent(t)}`} class="rounded-full border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">{t}</a>
+    ))}
+  </div>
+  <div id="grid" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {projects.map((p, index) => (
+      <div class="scroll-reveal" style={`transition-delay: ${index * 0.1}s`}>
+        <ProjectCard {...p} />
+      </div>
+    ))}
+  </div>
+  <script is:inline>
+    const params = new URLSearchParams(location.search);
+    const tag = params.get('tag');
+    if (!tag) return;
+    const grid = document.getElementById('grid');
+    for (const card of grid.children) {
+      const badges = Array.from(card.querySelectorAll('li')).map((b) => b.textContent);
+      if (!badges.includes(tag)) card.classList.add('hidden');
+    }
+  </script>
+</section>

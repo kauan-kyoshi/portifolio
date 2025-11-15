@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import SEO from "../components/SEO.astro";
+import ProjectsGrid from "../components/ProjectsGrid.astro";
+---
+<BaseLayout title="Projetos · Portfólio 42SP">
+  <Fragment slot="nav"><Nav /></Fragment>
+  <SEO title="Projetos · Portfólio 42SP" description="Lista de projetos com filtros por tags." />
+  <h1 class="text-2xl font-semibold mb-6">Projetos</h1>
+  <ProjectsGrid />
+</BaseLayout>

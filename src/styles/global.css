@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 255 255 255;
+  --fg: 17 24 39;
+}
+.dark {
+  --bg: 3 7 18;
+  --fg: 229 231 235;
+}
+
+html, body {
+  @apply min-h-full bg-[rgb(var(--bg))] text-[rgb(var(--fg))];
+}
+
+/* Subtle modern background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(600px 300px at 10% -10%, rgb(99 102 241 / 0.20), transparent),
+    radial-gradient(600px 300px at 110% 10%, rgb(14 165 233 / 0.15), transparent),
+    radial-gradient(1000px 500px at 50% 120%, rgb(52 211 153 / 0.12), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+a {
+  @apply text-primary-600 hover:text-primary-700 underline-offset-4 hover:underline;
+}
+
+.prose {
+  @apply prose-slate dark:prose-invert max-w-none;
+}
+
+code {
+  @apply rounded bg-gray-100 dark:bg-gray-800 px-1 py-0.5 text-sm;
+}
+
+.container {
+  @apply max-w-7xl;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Delays para animações em sequência */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+
+/* Transições suaves */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}

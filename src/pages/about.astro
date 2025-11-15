@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import SEO from "../components/SEO.astro";
+---
+<BaseLayout title="Sobre · Portfólio 42SP">
+  <SEO title="Sobre · Portfólio 42SP" description="Resumo, contato e objetivos profissionais." />
+  <Fragment slot="nav"><Nav /></Fragment>
+  <section class="prose max-w-none">
+    <div class="scroll-reveal">
+      <h1>Sobre</h1>
+    </div>
+    <div class="scroll-reveal" style="transition-delay: 0.1s">
+      <p>
+        Cadete na 42SP, interessado em sistemas, redes e desenvolvimento de
+        software. Este site foi feito com <strong>Astro</strong> +
+        <strong>Tailwind CSS</strong> e publicado como site estático.
+      </p>
+    </div>
+    <div class="scroll-reveal" style="transition-delay: 0.2s">
+      <p>
+        Entre em contato: <a href="mailto:kauankyoshik@gmail.com">kauankyoshik@gmail.com</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

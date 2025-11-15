@@ -1,0 +1,25 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+const { title = 'Portfólio — 42SP', description = 'Projetos e estudos', image = '/og.png' } = Astro.props as Props;
+---
+<>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" is:inline>
+    {JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Kauan Kyoshi Kubo Lima',
+      url: Astro.site?.toString() || 'https://example.com',
+      sameAs: ['https://github.com/SEU_USUARIO']
+    })}
+  </script>
+</>

@@ -1,0 +1,45 @@
+---
+import AnimatedBackground from '../components/AnimatedBackground.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+const { title = 'Portfólio — 42SP', description = 'Projetos e estudos', image = '/og.png' } = Astro.props;
+---
+<!doctype html>
+<html lang="pt-br" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0f172a" />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem('theme');
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light';
+        const theme = stored || system;
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+      } catch {}
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col font-[Inter,system-ui,Arial]">
+    <AnimatedBackground />
+    <ScrollReveal />
+    <slot name="nav" />
+    <main class="flex-1 container mx-auto px-4 py-10 md:py-14">
+      <slot />
+    </main>
+    <footer class="border-t/50 border-t py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+      Desenvolvido por Kauan Kyoshi · © 2025
+    </footer>
+  </body>
+  <style is:global>
+    @import "../styles/global.css";
+  </style>
+</html>
