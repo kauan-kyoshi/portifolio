@@ -3,18 +3,18 @@
     "title": "libft (42SP)",
     "description": "Implementação de biblioteca C com funções básicas.",
     "tags": ["C", "42"],
-    "repo": "https://github.com/SEU_USUARIO/libft"
+    "repo": "https://github.com/kauan-kyoshi/libft"
   },
   {
     "title": "get_next_line (42SP)",
     "description": "Leitura de linhas de um descritor de arquivo.",
     "tags": ["C", "I/O"],
-    "repo": "https://github.com/SEU_USUARIO/get_next_line"
+    "repo": "https://github.com/kauan-kyoshi/get_next_line"
   },
   {
     "title": "ft_printf (42SP)",
     "description": "Reimplementação de printf com flags principais.",
     "tags": ["C", "formatação"],
-    "repo": "https://github.com/SEU_USUARIO/ft_printf"
+    "repo": "https://github.com/kauan-kyoshi/ft_printf"
   }
 ]
