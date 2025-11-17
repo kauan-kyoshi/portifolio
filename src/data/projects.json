@@ -2,25 +2,25 @@
   {
     "title": "libft (42SP)",
     "description": "Implementação de biblioteca C com funções básicas.",
-    "tags": ["C", "42", "M1"],
+    "tags": ["C", "42", "M0"],
     "repo": "https://github.com/kauan-kyoshi/libft"
   },
   {
     "title": "get_next_line (42SP)",
     "description": "Leitura de linhas de um descritor de arquivo.",
-    "tags": ["C", "I/O", "42", "M1"],
+    "tags": ["C", "42", "M1"],
     "repo": "https://github.com/kauan-kyoshi/get_next_line"
   },
   {
     "title": "ft_printf (42SP)",
     "description": "Reimplementação de printf com flags principais.",
-    "tags": ["C", "formatação", "42" , "M1"],
+    "tags": ["C", "42" , "M1"],
     "repo": "https://github.com/kauan-kyoshi/ft_printf"
   },
   {
     "title": "so_long (42SP)",
     "description": "Jogo 2D simples usando a biblioteca MLX.",
-    "tags": ["C", "jogo", "42" , "M1"],
+    "tags": ["C", "42" , "M2"],
     "repo": "https://github.com/kauan-kyoshi/so_long"
   }
 ]
