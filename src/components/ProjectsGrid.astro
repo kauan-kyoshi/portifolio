@@ -6,9 +6,9 @@ const allTags = Array.from(new Set(projects.flatMap((p) => p.tags || [])));
 <section>
   <div class="mb-6 flex flex-wrap items-center gap-2">
     <strong class="mr-2 text-sm">Filtro:</strong>
-    <a href="?" class="rounded-full border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">Todos</a>
+    <a href="?" data-filter-tag="" class="rounded-full border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">Todos</a>
     {allTags.map((t) => (
-      <a href={`?tag=${encodeURIComponent(t)}`} class="rounded-full border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">{t}</a>
+      <a href={`?tag=${encodeURIComponent(t)}`} data-filter-tag={t} class="rounded-full border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">{t}</a>
     ))}
   </div>
   <div id="grid" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -19,13 +19,60 @@ const allTags = Array.from(new Set(projects.flatMap((p) => p.tags || [])));
     ))}
   </div>
   <script is:inline>
-    const params = new URLSearchParams(location.search);
-    const tag = params.get('tag');
-    if (!tag) return;
-    const grid = document.getElementById('grid');
-    for (const card of grid.children) {
-      const badges = Array.from(card.querySelectorAll('li')).map((b) => b.textContent);
-      if (!badges.includes(tag)) card.classList.add('hidden');
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(location.search);
+      const tag = params.get('tag');
+      const grid = document.getElementById('grid');
+      const buttons = Array.from(document.querySelectorAll('[data-filter-tag]'));
+      const normalize = (s) => (s || '').trim().toLowerCase().normalize('NFC');
+      // Highlight active filter button
+      if (tag) {
+        const normalizedTag = normalize(tag);
+        for (const btn of buttons) {
+          const btnTag = normalize(btn.dataset.filterTag);
+              if (btnTag === normalizedTag) btn.classList.add('bg-primary-600', 'text-white', 'border-primary-600', 'shadow-sm', 'dark:bg-primary-500', 'dark:text-white');
+              else btn.classList.remove('bg-primary-600', 'text-white', 'border-primary-600', 'shadow-sm', 'dark:bg-primary-500', 'dark:text-white');
+        }
+      } else {
+        // 'Todos' button
+        buttons.forEach((b) => {
+          if (!b.dataset.filterTag) b.classList.add('bg-primary-600', 'text-white', 'border-primary-600', 'shadow-sm', 'dark:bg-primary-500', 'dark:text-white');
+          else b.classList.remove('bg-primary-600', 'text-white', 'border-primary-600', 'shadow-sm', 'dark:bg-primary-500', 'dark:text-white');
+        });
+      }
+
+      if (!tag || !grid) return;
+
+      const normalizedTag = normalize(tag);
+      for (const card of grid.children) {
+        const badges = Array.from(card.querySelectorAll('ul > li')).map((b) => normalize(b.textContent));
+        if (!badges.includes(normalizedTag)) card.classList.add('hidden');
+        else card.classList.remove('hidden');
+      }
+
+      // Make links filter client-side to avoid full reloads (optional enhancement)
+      for (const btn of buttons) {
+        btn.addEventListener('click', (e) => {
+          const btnTag = btn.dataset.filterTag || '';
+          e.preventDefault();
+          // Update URL without reloading
+          const url = new URL(location.href);
+          if (btnTag) url.searchParams.set('tag', btnTag);
+          else url.searchParams.delete('tag');
+          history.pushState({}, '', url);
+          // Re-run filtering logic
+          const nt = normalize(btnTag);
+          for (const c of grid.children) {
+            const bs = Array.from(c.querySelectorAll('ul > li')).map((b) => normalize(b.textContent));
+            if (!nt) c.classList.remove('hidden');
+            else if (!bs.includes(nt)) c.classList.add('hidden');
+            else c.classList.remove('hidden');
+          }
+          // Update button highlight
+          buttons.forEach((b) => b.classList.remove('bg-primary-600', 'text-white', 'border-primary-600', 'shadow-sm', 'dark:bg-primary-500', 'dark:text-white'));
+          btn.classList.add('bg-primary-600', 'text-white', 'border-primary-600', 'shadow-sm', 'dark:bg-primary-500', 'dark:text-white');
+        });
+      }
+    });
   </script>
 </section>
