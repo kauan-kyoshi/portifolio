@@ -22,5 +22,11 @@
     "description": "Jogo 2D simples usando a biblioteca MLX.",
     "tags": ["C", "42" , "M2"],
     "repo": "https://github.com/kauan-kyoshi/so_long"
+  },
+  {
+    "title": "push_swap (42SP)",
+    "description": "Algoritmo de ordenação usando pilhas.",
+    "tags": ["C", "42" , "M2"],
+    "repo": "https://github.com/kauan-kyoshi/push_swap"
   }
 ]
