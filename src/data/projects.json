@@ -28,5 +28,11 @@
     "description": "Algoritmo de ordenação usando pilhas.",
     "tags": ["C", "42" , "M2"],
     "repo": "https://github.com/kauan-kyoshi/push_swap"
+  },
+  {
+    "title": "minitalk (42SP)",
+    "description": "Comunicação entre processos usando sinais.",
+    "tags": ["C", "42" , "M2"],
+    "repo": "https://github.com/kauan-kyoshi/minitalk"
   }
 ]
